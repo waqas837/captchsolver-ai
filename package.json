@@ -1,0 +1,22 @@
+{
+  "name": "captchasolver",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "@stripe/stripe-js": "^6.1.0",
+    "axios": "^1.7.7",
+    "bootstrap": "^5.3.3",
+    "eslint-config-next": "^14.2.6",
+    "jquery": "^3.7.1",
+    "metismenujs": "^1.4.0",
+    "next": "^14.2.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.4.1"
+  }
+}
