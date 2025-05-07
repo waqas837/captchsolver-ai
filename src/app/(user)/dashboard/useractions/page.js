@@ -220,9 +220,16 @@ const Actions = () => {
             margin: "auto",
           }}
         >
-          <h2 style={{ color: "#ffffff", textAlign: "center" }}>
+          <h1
+            style={{
+              fontSize: "30px",
+              fontWeight: "bold",
+              marginBottom: "20px",
+              textAlign: "center",
+            }}
+          >
             Select Payment Method
-          </h2>
+          </h1>
 
           {/* Payment Method Toggle */}
           <div style={{ display: "flex", width: "100%", marginBottom: "10px" }}>

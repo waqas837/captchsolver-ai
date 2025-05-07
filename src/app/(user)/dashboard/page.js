@@ -221,7 +221,8 @@ const UserDashboard = () => {
           </div>
         </div>
 
-        <button
+        <Link
+          href={"/dashboard/useractions"}
           id="add-balance"
           style={{
             width: "100%",
@@ -237,8 +238,12 @@ const UserDashboard = () => {
             marginBottom: "15px",
           }}
         >
-          Add Balance
-        </button>
+          <p
+            style={{ color: "white", textAlign: "center", fontWeight: "bold" }}
+          >
+            Add Balance
+          </p>
+        </Link>
       </div>
 
       <div
