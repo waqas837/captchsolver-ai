@@ -37,7 +37,7 @@ const UserDashboard = () => {
           setUsername(user.username || "User");
           setBalance(user.balance ? `$${user.balance}` : "$0.00");
           setRequestsRemaining(
-            user.totalAmountRequestsRemains || "0 requests remaining"
+            user.totalAmountRequestsRemains  
           );
           typeof window !== "undefined" &&
             localStorage.setItem("username", user.username);
@@ -64,6 +64,7 @@ const UserDashboard = () => {
                 requestOptions
               );
               const balanceData = await balanceResponse.json(); // Assuming response is JSON
+              console.log("balanceData", balanceData)
               if (balanceData.balance) {
                 setRequestsRemaining(
                   `${balanceData.balance} requests remaining`
