@@ -30,7 +30,7 @@ const UserDashboard = () => {
         });
 
         const data = await response.json();
-
+        console.log("data>>>", data)
         if (data.result && data.result[0]) {
           const user = data.result[0];
           setApiKey(user.BalanceApiKey || "");
