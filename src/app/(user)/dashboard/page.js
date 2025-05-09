@@ -35,10 +35,10 @@ const UserDashboard = () => {
           const user = data.result[0];
           setApiKey(user.BalanceApiKey || "");
           setUsername(user.username || "User");
-          // setBalance(user.balance ? `$${user.balance}` : "$0.00");
-          // setRequestsRemaining(
-          //   user.totalAmountRequestsRemains || "0 requests remaining"
-          // );
+          setBalance(user.balance ? `$${user.balance}` : "$0.00");
+          setRequestsRemaining(
+            user.totalAmountRequestsRemains || "0 requests remaining"
+          );
           typeof window !== "undefined" &&
             localStorage.setItem("username", user.username);
 
@@ -52,7 +52,7 @@ const UserDashboard = () => {
             });
 
             const requestOptions = {
-              method: "POST",
+              method: "get",
               headers: myHeaders,
               body: raw,
               redirect: "follow",
