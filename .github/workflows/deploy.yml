@@ -40,10 +40,23 @@ jobs:
           echo "NPM version:"
           npm -v
 
+          # Navigate to your app directory
           cd ${{ secrets.DEPLOY_PATH }}
+
+          # Clean up untracked files and reset the repository to the latest state
+          git clean -fd
           git reset --hard HEAD
+          git fetch origin
+          git checkout main
           git pull origin main
-          # npm install
+
+          # Install dependencies if necessary
+          npm install
+
+          # Build the Next.js application
           npm run build
-          NODE_ENV=production pm2 restart server.js --name next-server
+
+          # Set NODE_ENV to production and restart the application using pm2
+          NODE_ENV=production pm2 restart next-server || pm2 start server.js --name next-server
+
         EOF
