@@ -14,12 +14,11 @@ const UserDashboard = () => {
 
   useEffect(() => {
     const fetchUserInfo = async () => {
-      // Only run on client side
       const apiEndpoint = `${CONFIG.backendUrl}/user/getuserinfo`;
       const userToken =
         typeof window !== "undefined" && localStorage.getItem("userToken");
 
-      if (!userToken) return; // Exit if no token
+      if (!userToken) return;
 
       try {
         const response = await fetch(apiEndpoint, {
@@ -31,54 +30,18 @@ const UserDashboard = () => {
         });
 
         const data = await response.json();
+
         if (data.result && data.result[0]) {
           const user = data.result[0];
           setApiKey(user.BalanceApiKey || "");
           setUsername(user.username || "User");
-          setBalance(user.balance ? `$${user.balance}` : "$0.00");
-          setRequestsRemaining(
-            user.totalAmountRequestsRemains  
-          );
           typeof window !== "undefined" &&
             localStorage.setItem("username", user.username);
 
-          // Call the second API using the BalanceApiKey with async/await
-          if (user.BalanceApiKey) {
-            const myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-
-            const raw = JSON.stringify({
-              key: user.BalanceApiKey, // Dynamically using user.BalanceApiKey
-            });
-
-            const requestOptions = {
-              method: "get",
-              headers: myHeaders,
-              body: raw,
-              redirect: "follow",
-            };
-
-            try {
-              const balanceResponse = await fetch(
-                "http://api.captchasolver.ai/api/getBalance",
-                requestOptions
-              );
-              const balanceData = await balanceResponse.json(); // Assuming response is JSON
-              console.log("balanceData", balanceData)
-              if (balanceData.balance) {
-                setRequestsRemaining(
-                  `${balanceData.balance} requests remaining`
-                );
-                setBalance(
-                  balanceData.balance
-                    ? `$${balanceData.balance / 1000}`
-                    : "$0.00"
-                );
-              }
-            } catch (balanceError) {
-              console.error("Error fetching balance:", balanceError);
-            }
-          }
+          setRequestsRemaining(`${user.externalBalance} requests remaining`);
+          setBalance(
+            user.externalBalance ? `$${user.externalBalance / 1000}` : "$0.00"
+          );
         }
       } catch (error) {
         console.error("Error fetching user info:", error);
