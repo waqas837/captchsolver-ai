@@ -31,9 +31,9 @@ const Documentation = () => {
   // API examples data
   const apiExamples = {
     auth: {
-      curl: `curl -d '{"key": "C-AI#...."}' https://api.captchasolver.ai/some_endpoint`,
-      python: `import requests\n\npayload = {"key": "C-AI#...."}\nresponse = requests.get("https://api.captchasolver.ai/some_endpoint", json=payload)\nprint(response.json())`,
-      javascript: `fetch("https://api.captchasolver.ai/some_endpoint", {\n  method: "POST",\n  body: JSON.stringify({"key": "C-AI#...."})\n})\n.then(response => response.json())\n.then(data => console.log(data))\n.catch(error => console.error("Error:", error));`,
+      curl: `curl -d '{"key": "C-AI#...."}' https://api.captchasolver.ai/solve`,
+      python: `import requests\n\npayload = {"key": "C-AI#...."}\nresponse = requests.get("https://api.captchasolver.ai/solve", json=payload)\nprint(response.json())`,
+      javascript: `fetch("https://api.captchasolver.ai/solve", {\n  method: "POST",\n  body: JSON.stringify({"key": "C-AI#...."})\n})\n.then(response => response.json())\n.then(data => console.log(data))\n.catch(error => console.error("Error:", error));`,
     },
     classify: {
       curl: `curl -X POST https://api.captchasolver.ai/classify \\\n-H "Content-Type: application/json" \\\n-d '{\n"variant": "cardistance",\n"image": "base64_encoded_data",\n"key": "C-AI#...."\n}'`,
@@ -59,6 +59,7 @@ const Documentation = () => {
     "roblox_wall",
     "airbnb-register",
     "tinder",
+    "battlenet",
   ];
 
   const advancedFeatures = [
