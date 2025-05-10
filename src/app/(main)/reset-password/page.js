@@ -57,7 +57,7 @@ const Resetpassword = () => {
         </div>
       </div>
 
-      <div className="rts-cta-area rts-section-gapBottom bg_faq">
+      {/* <div className="rts-cta-area rts-section-gapBottom bg_faq">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
@@ -78,7 +78,7 @@ const Resetpassword = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -26,12 +26,9 @@ const Navbar = () => {
         <div className="container-30">
           <div className="col-lg-12">
             <div className="header-inner-one">
-              <div className="left-logo-area">
-                <Link href="/" className="logo">
-                  <img
-                    src="/dashboard/assets/images/logo/logo-01.png"
-                    alt="logo-image"
-                  />
+              <div className="left-logo-area" style={{ padding: 13 }}>
+                <Link href="/">
+                  <img src="/assets/images/logo/07.svg" alt="logo-image" />
                 </Link>
                 <div className="left-side-open-clouse" id="collups-left">
                   <img
