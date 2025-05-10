@@ -322,7 +322,7 @@ const Documentation = () => {
           <div className="endpoint-group" style={{ marginTop: "35px" }}>
             <h3>Token Generation</h3>
             <pre>
-              <code>POST https://api.captchasolver.ai/solve</code>
+              <code>POST https://api.captchasolver.ai/api/solve</code>
             </pre>
             <p>Obtain authentication tokens for protected endpoints.</p>
 
