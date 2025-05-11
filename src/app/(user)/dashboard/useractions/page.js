@@ -2,10 +2,10 @@
 import { CONFIG } from "@/lib/Config";
 import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-// const stripePromise = loadStripe(process.env.NEXT_PUBLIC_stripePK);
-const stripePromise = loadStripe(
-  "pk_test_51ISZUrEqN4NSRkYdJM5DtuA9DClwdNLaDL5AdE8ujRfziBvSC4ftF1JJ4BzRk42ZeONR5c5CAVQFeimMSbAYj8Nd00EbRhRrPV"
-);
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_stripePK);
+// const stripePromise = loadStripe(
+//   "pk_test_51ISZUrEqN4NSRkYdJM5DtuA9DClwdNLaDL5AdE8ujRfziBvSC4ftF1JJ4BzRk42ZeONR5c5CAVQFeimMSbAYj8Nd00EbRhRrPV"
+// );
 
 const Actions = () => {
   const [selectedCurrency, setSelectedCurrency] = useState({
