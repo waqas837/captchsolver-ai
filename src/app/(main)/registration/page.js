@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { CONFIG } from "@/lib/Config";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 const Registration = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,10 @@ const Registration = () => {
     password: "",
     agree: false,
   });
+  const [captchaToken, setCaptchaToken] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const captchaRef = useRef(null);
   const router = useRouter();
 
   // Handle Input Change
@@ -26,24 +30,31 @@ const Registration = () => {
   // Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
     if (!formData.agree) {
-      alert("You must agree to the terms and privacy policy.");
+      setError("You must agree to the terms and privacy policy.");
+      return;
+    }
+
+    if (!captchaToken) {
+      setError("Please complete the CAPTCHA verification.");
       return;
     }
 
     setLoading(true);
 
     try {
-      const response = await fetch(
-        `${CONFIG.backendUrl}/user/signup`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${CONFIG.backendUrl}/user/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          "h-captcha-response": captchaToken,
+        }),
+      });
 
       const data = await response.json();
       console.log("API Response:", data);
@@ -51,13 +62,20 @@ const Registration = () => {
       if (data.success) {
         router.push("/verify");
       } else if (data.status === "userExists") {
-        alert("Email already exists. Try logging in instead.");
+        setError("Email already exists. Try logging in instead.");
+      } else {
+        setError(data.message || "Registration failed. Please try again.");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Internal Server Error!");
+      setError("Internal Server Error! Please try again later.");
     } finally {
       setLoading(false);
+      // Reset captcha after submission
+      if (captchaRef.current) {
+        captchaRef.current.resetCaptcha();
+      }
+      setCaptchaToken(null);
     }
   };
 
@@ -72,6 +90,11 @@ const Registration = () => {
                 <h5 className="title">Create an account</h5>
               </div>
               <div className="body">
+                {error && (
+                  <div className="alert alert-danger" role="alert">
+                    {error}
+                  </div>
+                )}
                 <form onSubmit={handleSubmit}>
                   <div className="input-wrapper">
                     <input
@@ -99,6 +122,26 @@ const Registration = () => {
                       required
                     />
                   </div>
+
+                  <div style={{ textAlign: "left", margin: "20px 0" }}>
+                    <HCaptcha
+                      ref={captchaRef}
+                      sitekey={process.env.NEXT_PUBLIC_H_captcha_Site_key}
+                      onVerify={(token) => {
+                        setCaptchaToken(token);
+                        console.log("hCaptcha token:", token);
+                      }}
+                      onExpire={() => {
+                        setCaptchaToken(null);
+                        console.log("hCaptcha token expired");
+                      }}
+                      onError={(err) => {
+                        console.error("hCaptcha error:", err);
+                        setCaptchaToken(null);
+                      }}
+                    />
+                  </div>
+
                   <div className="check-wrapper">
                     <div className="form-check">
                       <input
@@ -125,7 +168,7 @@ const Registration = () => {
                     {loading ? "Creating Account..." : "Create Account"}
                   </button>
                   <p>
-                    If you have an account?
+                    If you have an account?{" "}
                     <Link className="ml--5" href="/log-in">
                       Sign in
                     </Link>
