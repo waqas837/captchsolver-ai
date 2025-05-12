@@ -24,7 +24,7 @@ const Actions = () => {
     const userToken =
       typeof window !== "undefined" && localStorage.getItem("userToken");
     // if (!userToken) {
-    //   window.location.href = "/index.html";
+    //   window.location.href = "/";
     // }
 
     // Fetch user info
