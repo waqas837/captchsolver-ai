@@ -297,6 +297,7 @@ const AdminDashboard = () => {
                         <th>Username</th>
                         <th>Email</th>
                         <th>Balance ($)</th>
+                        <th>PaymentBy</th>
                         <th className="text-center">Action</th>
                       </tr>
                     </thead>
@@ -305,9 +306,11 @@ const AdminDashboard = () => {
                         <tr key={user.id}>
                           <td>{user.username}</td>
                           <td>{user.email}</td>
+
                           <td id={`balance-${user.id}`}>
                             ${user.balance || 0}
                           </td>
+                          <td>{user.payment_method}</td>
                           <td className="text-center">
                             <button
                               onClick={() => openModal(user)}
@@ -355,6 +358,7 @@ const AdminDashboard = () => {
                         <th>User ID</th>
                         <th>Amount</th>
                         <th>Date</th>
+                        <th>Payment method</th>
                       </tr>
                     </thead>
                     <tbody id="payments-table">
@@ -363,6 +367,7 @@ const AdminDashboard = () => {
                           <td>{payment.userId}</td>
                           <td>${payment.amount}</td>
                           <td>{payment.date}</td>
+                          <td>{payment.payment_method}</td>
                         </tr>
                       ))}
                     </tbody>
