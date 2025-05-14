@@ -10,7 +10,6 @@ const languages = [
   { code: "id", name: "Indonesia" },
   { code: "de", name: "Deutsch" },
   { code: "it", name: "Italiano" },
-  { code: "ru", name: "Русский" },
   { code: "pt", name: "Português" },
   { code: "my", name: "Malay" },
   { code: "sa", name: "العربية" },
