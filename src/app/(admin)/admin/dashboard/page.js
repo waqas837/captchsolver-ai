@@ -297,7 +297,7 @@ const AdminDashboard = () => {
                         <th>Username</th>
                         <th>Email</th>
                         <th>Balance ($)</th>
-                        <th>PaymentBy</th>
+                        <th>Payment_By</th>
                         <th className="text-center">Action</th>
                       </tr>
                     </thead>
@@ -358,7 +358,7 @@ const AdminDashboard = () => {
                         <th>User ID</th>
                         <th>Amount</th>
                         <th>Date</th>
-                        <th>Payment method</th>
+                        <th>Payment_By</th>
                       </tr>
                     </thead>
                     <tbody id="payments-table">
